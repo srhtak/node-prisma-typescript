@@ -35,6 +35,10 @@ router.put('/updatePoints/:id',  ()=>{});
 router.post('/updatePoints',  ()=>{});
 router.delete('/updatePoints/:id',  ()=>{});
 
+//User routes
+
+
+
 
 
 export default router;
