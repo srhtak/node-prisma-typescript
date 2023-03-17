@@ -1,4 +1,6 @@
 import {Router,Request,Response} from 'express';
+import { body } from 'express-validator';
+import { handleInputErrors } from "./modules/middleware";
 
 
 
@@ -10,7 +12,9 @@ router.get('/product',  (req:Request,res:Response)=>{
     res.json({message: 'serhat test'});
 });
 router.get('/product/:id',  ()=>{});
-router.put('/product/:id',  ()=>{});
+router.put('/product/:id', body('name').isString(),handleInputErrors,(req:Request,res:Response)=>{
+
+});
 router.post('/product',  ()=>{});
 router.delete('/product/:id',  ()=>{});
 
