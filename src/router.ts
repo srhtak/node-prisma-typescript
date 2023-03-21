@@ -1,5 +1,5 @@
 import {Router,Request,Response} from 'express';
-import { body } from 'express-validator';
+import { body, oneOf } from 'express-validator';
 import { handleInputErrors } from "./modules/middleware";
 
 
@@ -13,9 +13,10 @@ router.get('/product',  (req:Request,res:Response)=>{
 });
 router.get('/product/:id',  ()=>{});
 router.put('/product/:id', body('name').isString(),handleInputErrors,(req:Request,res:Response)=>{
+});
+router.post('/product',body('name').isString(),handleInputErrors, (req:Request,res:Response)=>{
 
 });
-router.post('/product',  ()=>{});
 router.delete('/product/:id',  ()=>{});
 
 
@@ -26,8 +27,18 @@ router.get('/update',  (res)=>{
     res.json({message: 'Hello World'});
 });
 router.get('/update/:id',  ()=>{});
-router.put('/update/:id',  ()=>{});
-router.post('/update',  ()=>{});
+router.put('/update/:id',
+body('title').optional(),
+body('body').optional(),
+body('status').isIn(['IN_PROGRESS','SHIPPED','DEPRECATED']),
+body('version').optional(),
+()=>{
+
+});
+router.post('/update',
+body('title').exists().isString(),
+body('body').exists().isString(),
+()=>{});
 router.delete('/update/:id',  ()=>{});
 
 
@@ -35,8 +46,15 @@ router.delete('/update/:id',  ()=>{});
 
 router.get('/updatePoints',  ()=>{});
 router.get('/updatePoints/:id',  ()=>{});
-router.put('/updatePoints/:id',  ()=>{});
-router.post('/updatePoints',  ()=>{});
+router.put('/updatePoints/:id',
+body('name').optional().isString(),
+body('description').optional().isString(),
+()=>{});
+router.post('/updatePoints',
+body('name').optional().isString(),
+body('description').optional().isString(),
+body('updateId').exists().isString(),
+()=>{});
 router.delete('/updatePoints/:id',  ()=>{});
 
 //User routes
