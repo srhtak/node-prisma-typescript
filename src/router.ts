@@ -1,5 +1,6 @@
 import {Router,Request,Response} from 'express';
 import { body, oneOf } from 'express-validator';
+import { createProduct, deleteProduct, getOneProduct, getProducts, updateProduct } from './handlers/product';
 import { handleInputErrors } from "./modules/middleware";
 
 
@@ -8,16 +9,11 @@ const router = Router();
 
 // Products routes
 
-router.get('/product',  (req:Request,res:Response)=>{
-    res.json({message: 'serhat test'});
-});
-router.get('/product/:id',  ()=>{});
-router.put('/product/:id', body('name').isString(),handleInputErrors,(req:Request,res:Response)=>{
-});
-router.post('/product',body('name').isString(),handleInputErrors, (req:Request,res:Response)=>{
-
-});
-router.delete('/product/:id',  ()=>{});
+router.get('/product', getProducts);
+router.get('/product/:id',getOneProduct);
+router.put('/product/:id', body('name').isString(),handleInputErrors, updateProduct);
+router.post('/product',body('name').isString(),handleInputErrors, createProduct);
+router.delete('/product/:id', deleteProduct);
 
 
 //Update routes
