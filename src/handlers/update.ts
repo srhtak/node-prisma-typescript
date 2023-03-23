@@ -82,8 +82,8 @@ export const updateUpdate = async (req:Request, res:Response) => {
 export const deleteUpdate = async (req:Request, res:Response) => {
 
         const id = req.params.id;
-
         const deleted = await prisma.update.delete({
+
             where:{
                 id
             }

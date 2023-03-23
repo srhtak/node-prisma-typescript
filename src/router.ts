@@ -3,6 +3,7 @@ import { body } from 'express-validator';
 import { createUpdate, deleteUpdate, getOneUpdate, getUpdates, updateUpdate } from './handlers/update';
 import { createProduct, deleteProduct, getOneProduct, getProducts, updateProduct } from './handlers/product';
 import { handleInputErrors } from "./modules/middleware";
+import { createUpdatePoint, getUpdatePoints } from './handlers/updatePoints';
 
 
 
@@ -45,12 +46,14 @@ router.delete('/update/:id',  deleteUpdate);
 
 //Update Points routes
 
-router.get('/updatePoints', ()=>{});
+router.get('/updatePoints', getUpdatePoints);
 
 router.post('/updatePoints',
 body('name').optional().isString(),
 body('description').optional().isString(),
-body('updateId').exists().isString(), ()=>{});
+body('updateId').exists().isString(),
+createUpdatePoint
+);
 
 router.put('/updatePoints/:id',
 body('name').optional().isString(),
