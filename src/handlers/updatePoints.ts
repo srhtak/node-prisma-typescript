@@ -45,3 +45,46 @@ export const createUpdatePoint = async (req: Request, res: Response) => {
     res.json({ data: updatePoint });
 
 };
+
+
+export const getOneUpdatePoint = async (req: Request, res: Response) => {
+
+    const updatePoint = await prisma.updatePoint.findFirst({
+        where:{
+            id:req.params.id
+        }
+    })
+
+    res.json({data:updatePoint});
+
+}
+
+export const updateUpdatePoint = async (req: Request, res: Response) => {
+
+    const {name,description} = req.body;
+
+    const updatePoint = await prisma.updatePoint.update({
+        where:{
+            id:req.params.id
+        },
+        data:{
+            name,
+            description
+        }
+    })
+
+    res.json({data:updatePoint});
+
+
+}
+
+export const deleteUpdatePoint = async (req: Request, res: Response) => {
+
+        const updatePoint = await prisma.updatePoint.delete({
+            where:{
+                id:req.params.id
+            }
+        })
+
+        res.json({data:updatePoint});
+}

@@ -3,7 +3,7 @@ import { body } from 'express-validator';
 import { createUpdate, deleteUpdate, getOneUpdate, getUpdates, updateUpdate } from './handlers/update';
 import { createProduct, deleteProduct, getOneProduct, getProducts, updateProduct } from './handlers/product';
 import { handleInputErrors } from "./modules/middleware";
-import { createUpdatePoint, getUpdatePoints } from './handlers/updatePoints';
+import { createUpdatePoint, getUpdatePoints,updateUpdatePoint,getOneUpdatePoint,deleteUpdatePoint } from './handlers/updatePoints';
 
 
 
@@ -58,11 +58,12 @@ createUpdatePoint
 router.put('/updatePoints/:id',
 body('name').optional().isString(),
 body('description').optional().isString(),
-()=>{});
+updateUpdatePoint
+);
 
-router.get('/updatePoints/:id',  ()=>{});
+router.get('/updatePoints/:id',  getOneUpdatePoint);
 
-router.delete('/updatePoints/:id',  ()=>{});
+router.delete('/updatePoints/:id',  deleteUpdatePoint);
 
 //User routes
 
